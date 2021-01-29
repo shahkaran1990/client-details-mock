@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="ContactDetailsService" targetNamespace="http://www.unicorn-data.uk/interfaces/ContactDetailsWebservice"  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.unicorn-data.uk/interfaces/ContactDetailsWebservice" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.unicorn-data.uk/interfaces/ContactDetailsWebservice" xmlns:bons0="http://www.unicorn-data.uk/interfaces/ContactDetailsWebservice" xmlns:bons1="http://www.unicorn-data.uk/bo/ContactDetailsResponse" xmlns:bons3="http://www.unicorn-data.uk/bo/ContactDetailsRequest">
+			<xsd:import namespace="http://www.unicorn-data.uk/bo/ContactDetailsResponse" />
+			<xsd:import namespace="http://www.unicorn-data.uk/bo/ContactDetailsRequest" />
+			<xsd:element name="contactDetails">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ContactDetailsInput" nillable="true" type="bons3:ContactDetailsRequest" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="contactDetailsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contactDetailsOutput" nillable="true" type="bons1:ContactDetailsResponse" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+		<xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.unicorn-data.uk/bo/ContactDetailsResponse" xmlns:bons1="http://www.unicorn-data.uk/bo/common/response.xsd">
+			<xsd:import namespace="http://www.unicorn-data.uk/bo/common/response.xsd" />
+			<xsd:complexType name="ContactDetailsResponse">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="response" type="bons1:response"></xsd:element>
+					<xsd:element minOccurs="0" name="code" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+		<xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.unicorn-data.uk/bo/common/response.xsd" xmlns:bons0="http://www.unicorn-data.uk/bo/common/response.xsd">
+			<xsd:complexType name="response">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="phoneNumber" type="xsd:string"></xsd:element>
+					<xsd:element minOccurs="0" name="email" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+		<xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.unicorn-data.uk/bo/ContactDetailsRequest">
+			<xsd:complexType name="ContactDetailsRequest">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="clientId" type="xsd:string"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="contactDetailsRequestMsg">
+		<wsdl:part element="tns:contactDetails" name="contactDetailsParameters" />
+	</wsdl:message>
+	<wsdl:message name="contactDetailsResponseMsg">
+		<wsdl:part element="tns:contactDetailsResponse" name="contactDetailsResult" />
+	</wsdl:message>
+	<wsdl:portType name="ContactDetailsWebservice">
+		<wsdl:operation name="contactDetails">
+			<wsdl:input message="tns:contactDetailsRequestMsg" name="contactDetailsRequest" />
+			<wsdl:output message="tns:contactDetailsResponseMsg" name="contactDetailsResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ContactDetailsWebserviceSOAP" type="tns:ContactDetailsWebservice">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="contactDetails">
+			<soap:operation soapAction="http://www.unicorn-data.uk/interfaces/ContactDetailsWebservice/contactDetails" />
+			<wsdl:input name="contactDetailsRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="contactDetailsResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ContactDetailsWebservice">
+		<wsdl:port binding="tns:ContactDetailsWebserviceSOAP" name="ContactDetailsWebservice">
+			<soap:address location="${SOAP_BASE_URL}/services/contact-details" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

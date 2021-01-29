@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="AddressDetailsService" targetNamespace="http://www.unicorn-data.uk/interfaces/AddressDetailsWebservice"  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.unicorn-data.uk/interfaces/AddressDetailsWebservice" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.unicorn-data.uk/interfaces/AddressDetailsWebservice" xmlns:bons0="http://www.unicorn-data.uk/interfaces/AddressDetailsWebservice" xmlns:bons1="http://www.unicorn-data.uk/bo/AddressDetailsResponse" xmlns:bons3="http://www.unicorn-data.uk/bo/AddressDetailsRequest">
+			<xsd:import namespace="http://www.unicorn-data.uk/bo/AddressDetailsResponse" />
+			<xsd:import namespace="http://www.unicorn-data.uk/bo/AddressDetailsRequest" />
+			<xsd:element name="addressDetails">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AddressDetailsInput" nillable="true" type="bons3:AddressDetailsRequest" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="addressDetailsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="addressDetailsOutput" nillable="true" type="bons1:AddressDetailsResponse" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+		<xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.unicorn-data.uk/bo/AddressDetailsResponse" xmlns:bons1="http://www.unicorn-data.uk/bo/common/response.xsd">
+			<xsd:import namespace="http://www.unicorn-data.uk/bo/common/response.xsd" />
+			<xsd:complexType name="AddressDetailsResponse">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="response" type="bons1:response"></xsd:element>
+					<xsd:element minOccurs="0" name="code" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+		<xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.unicorn-data.uk/bo/common/response.xsd" xmlns:bons0="http://www.unicorn-data.uk/bo/common/response.xsd">
+			<xsd:complexType name="response">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="phoneNumber" type="xsd:string"></xsd:element>
+					<xsd:element minOccurs="0" name="email" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+		<xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.unicorn-data.uk/bo/AddressDetailsRequest">
+			<xsd:complexType name="AddressDetailsRequest">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="clientId" type="xsd:string"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="addressDetailsRequestMsg">
+		<wsdl:part element="tns:addressDetails" name="addressDetailsParameters" />
+	</wsdl:message>
+	<wsdl:message name="addressDetailsResponseMsg">
+		<wsdl:part element="tns:addressDetailsResponse" name="addressDetailsResult" />
+	</wsdl:message>
+	<wsdl:portType name="AddressDetailsWebservice">
+		<wsdl:operation name="addressDetails">
+			<wsdl:input message="tns:addressDetailsRequestMsg" name="addressDetailsRequest" />
+			<wsdl:output message="tns:addressDetailsResponseMsg" name="addressDetailsResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="AddressDetailsWebserviceSOAP" type="tns:AddressDetailsWebservice">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="addressDetails">
+			<soap:operation soapAction="http://www.unicorn-data.uk/interfaces/AddressDetailsWebservice/addressDetails" />
+			<wsdl:input name="addressDetailsRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="addressDetailsResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="AddressDetailsWebservice">
+		<wsdl:port binding="tns:AddressDetailsWebserviceSOAP" name="AddressDetailsWebservice">
+			<soap:address location="${SOAP_BASE_URL}/services/address-details" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

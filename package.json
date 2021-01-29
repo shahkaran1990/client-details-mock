@@ -1,0 +1,42 @@
+{
+  "name": "client-details-mock",
+  "version": "1.0.0",
+  "description": "Case study webservice for BPM",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "compliance": "npm run compliance:lint",
+    "compliance:lint": "eslint --ignore-path .gitignore . || true",
+    "pipeline": "npm run compliance && npm run security",
+    "security": "npm run security:outdated && npm run security:audit",
+    "security:audit": "npm audit || true",
+    "security:outdated": "npm outdated || true"
+  },
+  "author": "Karan Shah",
+  "license": "ISC",
+  "dependencies": {
+    "@dwp/node-logger": "^0.14.3",
+    "express": "^4.17.1",
+    "faker": "^5.2.0",
+    "fs": "0.0.1-security",
+    "http": "0.0.1-security",
+    "http-status-codes": "^2.1.4",
+    "joi": "^17.3.0",
+    "node-fetch": "^2.6.1",
+    "path": "^0.12.7",
+    "strong-soap": "^3.0.0",
+    "swagger-stats": "^0.95.18"
+  },
+  "files": [
+    "src",
+    "server.js"
+  ],
+  "devDependencies": {
+    "@commitlint/cli": "11.0.0",
+    "@dwp/commitlint-config-base": "1.1.0",
+    "@dwp/eslint-config-base": "4.1.0",
+    "eslint": "7.13.0",
+    "husky": "4.3.0",
+    "lint-staged": "10.5.1"
+  }
+}
