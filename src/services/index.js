@@ -3,7 +3,7 @@ const contactDetailsService = require('./contactDetailsService');
 const addressDetailsService = require('./addressDetailsService');
 
 module.exports = {
-    personalDetailsService,
-    contactDetailsService,
-    addressDetailsService,
-}
+  personalDetailsService,
+  contactDetailsService,
+  addressDetailsService,
+};
