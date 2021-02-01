@@ -24,7 +24,8 @@
 			<xsd:complexType name="PersonalDetailsResponse">
 				<xsd:sequence>
 					<xsd:element minOccurs="0" name="response" type="bons1:response"></xsd:element>
-					<xsd:element minOccurs="0" name="code" type="xsd:string" />
+          <xsd:element minOccurs="0" name="code" type="xsd:string" />
+          <xsd:element minOccurs="0" name="msg" type="xsd:string" />
 				</xsd:sequence>
 			</xsd:complexType>
 		</xsd:schema>
@@ -71,7 +72,7 @@
 	</wsdl:binding>
 	<wsdl:service name="PersonalDetailsWebservice">
 		<wsdl:port binding="tns:PersonalDetailsWebserviceSOAP" name="PersonalDetailsWebservice">
-			<soap:address location="${SOAP_BASE_URL}/services/personal-details" />
+			<soap:address location="SOAP_BASE_URL/services/personal-details" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
